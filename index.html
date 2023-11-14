@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guessing Game</title>
+    <style>
+        {
+  box-sizing: border-box;
+}
+body {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+div.container {
+  width: 70%;
+  margin: auto;
+}
+h1#character-choice {
+  background-color: pink;
+  border-radius: 1rem;
+  width: 400px;
+  margin: auto;
+}
+h1#game-title {
+  font-style: bold;
+  background-color: pink;
+  border-radius: 1rem;
+  font-size: 5vw;
+}
+table {
+  margin: auto;
+}
+th,
+td,
+tr {
+  vertical-align: top;
+}
+input.letter-input,
+th,
+td {
+  text-align: center;
+  font-size: 4vw;
+  width: calc(80% / 5);
+  background: linear-gradient(lightpink, red);
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+  margin: 1rem calc(5% / 5);
+}
+
+
+img#character-image {
+  animation: rockingCharacter 5s ease-in-out infinite;
+}
+@keyframes rockingCharacter {
+  0% {
+    transform: rotate(0deg);
+  } 25% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  } 100% {
+    transform: rotate(0deg);
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+  <h1 id="character-choice">Choose Your Character!</h1>
+  <img src="" width="180" height=200" id="character-image" alt="character-select-image" />
+<select name="image-choice" id="image-select">
+  <option value="" disabled selected>Select an image</option>
+  <option value="eironn">Eironn</option>
+  <option value="belinda">Belinda</option>
+  <option value="estrilda">Estrilda</option>
+  <option value="brutus">Brutus</option>
+  <option value="kalene">Kelene</option>
+</select>
+  
+  
+  
+  <h1 id="game-title">GUESS THE PASSWORD!</h1>
+  <form id="password-form">
+  </form>
+  <table>
+    <thead>
+      <tr>
+        <th>Wrong:</th>
+        <th>Wrong:</th>
+        <th>Wrong:</th>
+        <th>Wrong:</th>
+        <th>Wrong:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <td id="td0">X:<br>a<br>c</td>
+      <td id="td1">X:</td>
+      <td id="td2">X:</td>
+      <td id="td3">X:<br>b<br>d</td>
+      <td id="td4">X:</td>
+    </tbody>
+  </table>
+</div>
+
+    <script>
+        const passwordForm = document.getElementById("password-form");
+let phrase = "whale";
+let index = 0;
+
+for (let char of phrase) {
+  const letterInput = document.createElement("input");
+  letterInput.type = "text";
+  letterInput.id = index.toString();
+  // add the class name
+  letterInput.classList.add("letter-input");  passwordForm.appendChild(letterInput);
+  index++;
+}
+
+passwordForm.addEventListener("change", function (event) {
+  const thisInput = event.target;
+  const guess = thisInput.value;
+  console.log(thisInput);
+  console.log(guess);
+  console.log(thisInput.id);
+  if (guess === phrase[parseInt(thisInput.id)]) {
+    alert("Your guess was right!");
+    thisInput.disabled = true;
+    thisInput.placeholder = guess;
+  } else {
+    alert("Tough luck your wrong.")
+    document.getElementById(`td${thisInput.id}`).innerHTML += "<br>" + guess;
+    thisInput.value = "";
+  }
+});
+
+
+
+const imageSelect = document.getElementById("image-select");
+const characterImg = document.getElementById("character-image");
+
+const belindaSrc =
+  "https://drive.google.com/uc?export=view&id=1VUs0HCaaJ8TfmqyI01YC7qdMM94lA5yF";
+const estrildaSrc =
+  "https://drive.google.com/uc?export=view&id=1ZZSKtWzPwSxd32M4rmCrTcD6YY4iaGX4";
+const brutusSrc =
+  "https://drive.google.com/uc?export=view&id=1ykirlrhDBi8y3PhfHPcqTehks_FxVAKi";
+const eironnSrc =
+  "https://drive.google.com/uc?export=view&id=135YSALLMk_dGs5HFdjLJNc_Z8X3fHRFG";
+const kaleneSrc =
+  "https://drive.google.com/uc?export=view&id=1bIKf4f3eOYHO3Nu4SE1_V_6rrr1Vms95";
+const characterSrc =
+  "https://drive.google.com/uc?export=view&id=135YSALLMk_dGs5HFdjLJNc_Z8X3fHRFG";
+
+const characterSelectSrc =
+  "https://upload.wikimedia.org/wikipedia/en/b/bd/Daisy_%28Super_Mario_Party%29.png";
+
+characterImg.src = characterSrc;
+
+imageSelect.addEventListener("change", function () {
+  console.log(this.value);
+  let userChoice = this.value;
+  if (userChoice === "eironn") {
+    characterImg.src = eironnSrc;
+  } else if (userChoice === "belinda") {
+    characterImg.src = belindaSrc;
+  } else if (userChoice === "estrilda") {
+    characterImg.src = estrildaSrc;
+  } else if (userChoice === "brutus") {
+    characterImg.src = brutusSrc;
+  } else if (userChoice === "kalene") {
+    characterImg.src = kaleneSrc;
+  }
+});
+
+
+    </script>
+</body>
+</html>
